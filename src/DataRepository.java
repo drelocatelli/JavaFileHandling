@@ -8,9 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.Data;
-
-public class DataRepository extends Data {
+public class DataRepository {
 	private static final String FILENAME = "data.txt";
 	private static final long serialVersionUID = 1L;
 

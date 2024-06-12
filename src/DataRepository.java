@@ -1,3 +1,5 @@
+package repository;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,12 +10,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataRepository {
+public class DataRepository<T> {
 	private static final String FILENAME = "data.txt";
 	private static final long serialVersionUID = 1L;
+    private T data;
 
-	public <T> DataRepository(T data) {
-		super(data);
+	public DataRepository(T data) {
+		this.data = data;
 	}
 	
 	// Método para salvar dados em um arquivo de texto
@@ -23,7 +26,7 @@ public class DataRepository {
             objectOut.writeObject(dataList);
             System.out.println("Dados salvos com sucesso.");
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -34,8 +37,9 @@ public class DataRepository {
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
             dataList = (List<Data<T>>) objectIn.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
+        System.out.print(dataList.toString());
         return dataList;
     }
 
@@ -44,6 +48,7 @@ public class DataRepository {
         List<Data<T>> dataList = readData();
         dataList.add(new Data<>(newData));
         saveData(dataList);
+        System.out.println("Dado salvo:" + newData.toString());
     }
 
     // Método para atualizar dados existentes
@@ -86,7 +91,7 @@ public class DataRepository {
             System.out.println("Dados apagados com sucesso.");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
